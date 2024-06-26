@@ -1,4 +1,4 @@
-# dgm_project
+# Deep Generative Model - Project
 lecture project
 
 # VAE-based Medical Image Generator
