@@ -1,8 +1,10 @@
 # training script for the model
 import torch
 import torch.nn as nn
+from torch.optim.lr_scheduler import ReduceLROnPlateau
 from matplotlib import pyplot as plt
 from modules.vae import VAE
+from modules.vqvae import VQVAE
 from utils.data import get_data_loader, get_parameters
 from argparse import ArgumentParser
 import wandb
@@ -19,13 +21,14 @@ class Config:
 
 
 class Trainer():
-    def __init__(self, model, optimizer, device, args, max_epochs=100):
+    def __init__(self, model, optimizer, device, args):
         self.model = model
         self.optimizer = optimizer
         self.device = device
         self.args = args
-        self.max_epochs = max_epochs
+        self.max_epochs = args.max_epochs
         self.log_path = './logs'
+        self.scheduler = ReduceLROnPlateau(optimizer, mode='min', factor=0.5, patience=10)
 
     def save_checkpoint(self, tag):
         torch.save(self.model.state_dict(), f'{self.log_path}/checkpoints/vae_{tag}.pt')
@@ -52,11 +55,14 @@ class Trainer():
         # compute mean loss
         mean_losses = {k: sum(v)/len(v) for k, v in losses.items()}
         print(f'Train Loss: {mean_losses["train"]}, Val Loss: {mean_losses["val"]}')
+        self.scheduler.step(mean_losses['val'])
+        lr = self.scheduler.get_last_lr()
+        print(f'Learning rate: {lr}')
         if self.args.wandb:
-            wandb.log({"train loss": mean_losses['train'], "val loss": mean_losses['val']})
             wandb_images_x_hat = wandb.Image(x_hat, caption='reconstructed')
             wandb_images_x = wandb.Image(x, caption='original')
             wandb.log({"original": wandb_images_x,"reconstructed": wandb_images_x_hat})
+            wandb.log({"train loss": mean_losses['train'], "val loss": mean_losses['val']})
         self.model.train()
     
     
@@ -92,11 +98,12 @@ def main():
     # training arguments
     parser.add_argument('--batch_size', type=int, default=128)
     parser.add_argument('--eval_freq', type=int, default=10)
-    parser.add_argument('--ckpt_freq', type=int, default=10)
-    parser.add_argument('--max_epochs', type=int, default=100)
-    parser.add_argument('--learning_rate','--lr', type=float, default=1e-5)
+    parser.add_argument('--ckpt_freq', type=int, default=100)
+    parser.add_argument('--max_epochs', type=int, default=1000)
+    parser.add_argument('--learning_rate','--lr', type=float, default=1e-3)
     parser.add_argument('--wandb', type=int, default=0, choices=[0, 1])
     parser.add_argument('--state', type=str, default='train', choices=['train', 'test'])
+    # parser.add_argument('--load_checkpoint', type=str, default='/home/lliu/dgm_project/logs/checkpoints/vae_200.pt') # TODO: load the latest checkpoint
     
     # data arguments
     parser.add_argument('--data_flag', type=str, default='pathmnist', choices=['pathmnist', 'breastmnist', 'chestmnist', 'dermamnist', 'octmnist', 'pneumoniamnist', 'retinamnist', 'organmnist_axial', 'organmnist_coronal', 'organmnist_sagittal'])
@@ -110,19 +117,21 @@ def main():
     input_channels = params['n_channels'] 
     output_channels = input_channels
     latent_channels = 64
-    hidden_channels = [32, 64]
+    hidden_channels = [32, 64, 128, 256]
     # n_classes = params['n_classes']
 
-    vae_config = Config(input_channels = input_channels,
-                        output_channels = output_channels,
-                        latent_channels = latent_channels,
-                        hidden_channels = hidden_channels)
+    # vae_config = Config(input_channels = input_channels,
+    #                     output_channels = output_channels,
+    #                     latent_channels = latent_channels,
+    #                     hidden_channels = hidden_channels)
+    # model = VAE(vae_config).to(device)
 
-    model = VAE(vae_config).to(device)
+    vqvae_config = Config()
+    model = VQVAE(vqvae_config).to(device)
     print(f"Number of parameters: {get_parameters(model):,}")
-    model_name = 'vanilla_vae'
-
-    optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
+    model_name = 'vqvae'
+    # import ipdb; ipdb.set_trace()
+    optimizer = torch.optim.AdamW(model.parameters(), lr=args.learning_rate)
 
     trainer = Trainer(model, optimizer, device, args)
 

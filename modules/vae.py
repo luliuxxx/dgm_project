@@ -5,11 +5,12 @@ import torch.nn.functional as F
 class VAE(nn.Module):
     def __init__(self, config):
         super().__init__()
-        self.input_channels = config.input_channels
-        self.output_channels = config.output_channels
-        self.latent_channels = config.latent_channels
-        self.hidden_channels = config.hidden_channels
+        self.input_channels = config.input_channels if hasattr(config, 'input_channels') else 3
+        self.output_channels = config.output_channels if hasattr(config, 'output_channels') else 3
+        self.latent_channels = config.latent_channels if hasattr(config, 'latent_channels') else 64
+        self.hidden_channels = config.hidden_channels if hasattr(config, 'hidden_channels') else [32, 64, 128, 256]
         self.intermediate_dims = 7 # assuming 28x28 input, 4 downsample layers, then after encoder convolution, the output is B, C, 7, 7
+        #TODO: I m not sure about the intermediate_dims, I will check it later
         # Encoder definition
         encoder_modules = []
         for i in range(len(self.hidden_channels)):
@@ -35,6 +36,7 @@ class VAE(nn.Module):
         self.decoder = nn.Sequential(*decoder_modules)
 
     def encode(self, x):
+        
         x = self.encoder(x)
         x = x.view(x.size(0), -1)
        
