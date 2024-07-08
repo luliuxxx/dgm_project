@@ -5,6 +5,7 @@ from torch.optim.lr_scheduler import ReduceLROnPlateau
 from matplotlib import pyplot as plt
 from modules.vae import VAE
 from modules.vqvae import VQVAE
+from modules.cvae import CVAE
 from utils.data import get_data_loader, get_parameters
 from argparse import ArgumentParser
 import wandb
@@ -21,7 +22,7 @@ class Config:
 
 
 class Trainer():
-    def __init__(self, model, optimizer, device, args):
+    def __init__(self, model, optimizer, device, args, use_labels=False):
         self.model = model
         self.optimizer = optimizer
         self.device = device
@@ -29,14 +30,19 @@ class Trainer():
         self.max_epochs = args.max_epochs
         self.log_path = './logs'
         self.scheduler = ReduceLROnPlateau(optimizer, mode='min', factor=0.5, patience=10)
+        self.use_labels = use_labels
 
     def save_checkpoint(self, tag):
         torch.save(self.model.state_dict(), f'{self.log_path}/checkpoints/vae_{tag}.pt')
     
     def train_n_iters(self, batches_data):
-        for images, _ in tqdm(batches_data):
+        for images, labels in tqdm(batches_data):
             images = images.to(self.device)
-            loss, x_hats = self.model(images)
+            if self.use_labels:
+                labels = labels.to(self.device)
+                loss, x_hats = self.model(images, labels)
+            else:
+                loss, x_hats = self.model(images)
             self.optimizer.zero_grad()
             loss.backward()
             self.optimizer.step()
@@ -48,9 +54,13 @@ class Trainer():
         losses = {'train': [], 'val': []}
         for data in [train_loader, val_loader]:
             for batch_data in data:
-                x, _ = batch_data
+                x, labels = batch_data
                 x = x.to(self.device)
-                loss, x_hat = self.model(x)
+                if self.use_labels:
+                    labels = labels.to(self.device)
+                    loss, x_hats = self.model(x, labels)
+                else:
+                    loss, x_hats = self.model(x)
                 losses['train' if data == train_loader else 'val'].append(loss.item())
         # compute mean loss
         mean_losses = {k: sum(v)/len(v) for k, v in losses.items()}
@@ -59,7 +69,7 @@ class Trainer():
         lr = self.scheduler.get_last_lr()
         print(f'Learning rate: {lr}')
         if self.args.wandb:
-            wandb_images_x_hat = wandb.Image(x_hat, caption='reconstructed')
+            wandb_images_x_hat = wandb.Image(x_hats, caption='reconstructed')
             wandb_images_x = wandb.Image(x, caption='original')
             wandb.log({"original": wandb_images_x,"reconstructed": wandb_images_x_hat})
             wandb.log({"train loss": mean_losses['train'], "val loss": mean_losses['val']})
@@ -84,8 +94,13 @@ class Trainer():
     def test(self, test_loader):
         self.model.eval()
         for batch_data in test_loader:
-            x, _ = batch_data
+            x, labels = batch_data
             x = x.to(self.device)
+            if self.use_labels:
+                labels = labels.to(self.device)
+                loss, x_hats = self.model(x, labels)
+            else:
+                loss, x_hats = self.model(x)
             loss, x_hat = self.model(x)
             print(f'Test Loss: {loss.item()}')
         return None
@@ -105,20 +120,20 @@ def main():
     parser.add_argument('--state', type=str, default='train', choices=['train', 'test'])
     # parser.add_argument('--load_checkpoint', type=str, default='/home/lliu/dgm_project/logs/checkpoints/vae_200.pt') # TODO: load the latest checkpoint
     
-    # data arguments
-    parser.add_argument('--data_flag', type=str, default='pathmnist', choices=['pathmnist', 'breastmnist', 'chestmnist', 'dermamnist', 'octmnist', 'pneumoniamnist', 'retinamnist', 'organmnist_axial', 'organmnist_coronal', 'organmnist_sagittal'])
+    # data arguments, multiple for multi-modality
+    parser.add_argument('--data_flag', nargs="+", type=str, default='pathmnist', choices=['pathmnist', 'breastmnist', 'chestmnist', 'dermamnist', 'octmnist', 'pneumoniamnist', 'retinamnist', 'organmnist_axial', 'organmnist_coronal', 'organmnist_sagittal'])
 
     args = parser.parse_args()
 
     # load data
-
     train_loader, val_loader, test_loader, params = get_data_loader(args)
+
     # model configuration
     input_channels = params['n_channels'] 
     output_channels = input_channels
     latent_channels = 64
     hidden_channels = [32, 64, 128, 256]
-    # n_classes = params['n_classes']
+    n_classes = params['n_classes']
 
     # vae_config = Config(input_channels = input_channels,
     #                     output_channels = output_channels,
@@ -126,21 +141,28 @@ def main():
     #                     hidden_channels = hidden_channels)
     # model = VAE(vae_config).to(device)
 
-    vqvae_config = Config()
-    model = VQVAE(vqvae_config).to(device)
+    if n_classes == 1:
+        vqvae_config = Config()
+        model = VQVAE(vqvae_config).to(device)
+        model_name = 'vqvae'
+        use_labels = False
+    else:
+        cvae_config = Config()
+        model = CVAE(cvae_config).to(device)
+        model_name = 'cvae'
+        use_labels = True
     print(f"Number of parameters: {get_parameters(model):,}")
-    model_name = 'vqvae'
     # import ipdb; ipdb.set_trace()
     optimizer = torch.optim.AdamW(model.parameters(), lr=args.learning_rate)
 
-    trainer = Trainer(model, optimizer, device, args)
+    trainer = Trainer(model, optimizer, device, args, use_labels)
 
     if args.state=='train' and args.wandb:
         wandb.init(
             project = 'dgm_project',
             config = {
                 'model': model_name,
-                'dataset': 'pathmnist',
+                'dataset': "+".join(args.data_flag),
             }
         )
 
