@@ -6,23 +6,15 @@ from matplotlib import pyplot as plt
 from modules.vae import VAE
 from modules.vqvae import VQVAE
 from modules.cvae import CVAE
+from configs import MODEL_STORE
 from utils.data import get_data_loader, get_parameters
 from argparse import ArgumentParser
 import wandb
 import numpy as np
 from tqdm import tqdm
 
-class Config:
-    """
-    Configuration class to set attributes based on given keyword arguments.
-    """
-    def __init__(self, **kwargs):
-        for k, v in kwargs.items():
-            setattr(self, k, v)
-
-
 class Trainer():
-    def __init__(self, model, optimizer, device, args, use_labels=False):
+    def __init__(self, model, optimizer, device, args, use_labels=False, ckpt_name="VAE"):
         self.model = model
         self.optimizer = optimizer
         self.device = device
@@ -31,9 +23,10 @@ class Trainer():
         self.log_path = './logs'
         self.scheduler = ReduceLROnPlateau(optimizer, mode='min', factor=0.5, patience=10)
         self.use_labels = use_labels
+        self.ckpt_name=ckpt_name
 
     def save_checkpoint(self, tag):
-        torch.save(self.model.state_dict(), f'{self.log_path}/checkpoints/vae_{tag}.pt')
+        torch.save(self.model.state_dict(), f'{self.log_path}/checkpoints/{self.ckpt_name}_{tag}.pt')
     
     def train_n_iters(self, batches_data):
         for images, labels in tqdm(batches_data):
@@ -114,48 +107,31 @@ def main():
     parser.add_argument('--batch_size', type=int, default=128)
     parser.add_argument('--eval_freq', type=int, default=10)
     parser.add_argument('--ckpt_freq', type=int, default=100)
-    parser.add_argument('--max_epochs', type=int, default=1000)
+    parser.add_argument('--max_epochs', type=int, default=10)
     parser.add_argument('--learning_rate','--lr', type=float, default=1e-3)
     parser.add_argument('--wandb', type=int, default=0, choices=[0, 1])
     parser.add_argument('--state', type=str, default='train', choices=['train', 'test'])
+    parser.add_argument("--use_config", type=str, default="CVAE_RGB")
+    parser.add_argument("--label_to_binary", type=str)
     # parser.add_argument('--load_checkpoint', type=str, default='/home/lliu/dgm_project/logs/checkpoints/vae_200.pt') # TODO: load the latest checkpoint
     
     # data arguments, multiple for multi-modality
-    parser.add_argument('--data_flag', nargs="+", type=str, default='pathmnist', choices=['pathmnist', 'breastmnist', 'chestmnist', 'dermamnist', 'octmnist', 'pneumoniamnist', 'retinamnist', 'organmnist_axial', 'organmnist_coronal', 'organmnist_sagittal'])
+    parser.add_argument('--data_flag', type=str, default='pathmnist', choices=['pathmnist', 'breastmnist', 'chestmnist', 'dermamnist', 'octmnist', 'pneumoniamnist', 'retinamnist', 'organmnist_axial', 'organmnist_coronal', 'organmnist_sagittal'])
 
     args = parser.parse_args()
 
     # load data
     train_loader, val_loader, test_loader, params = get_data_loader(args)
-
-    # model configuration
-    input_channels = params['n_channels'] 
-    output_channels = input_channels
-    latent_channels = 64
-    hidden_channels = [32, 64, 128, 256]
-    n_classes = params['n_classes']
-
-    # vae_config = Config(input_channels = input_channels,
-    #                     output_channels = output_channels,
-    #                     latent_channels = latent_channels,
-    #                     hidden_channels = hidden_channels)
-    # model = VAE(vae_config).to(device)
-
-    if n_classes == 1:
-        vqvae_config = Config()
-        model = VQVAE(vqvae_config).to(device)
-        model_name = 'vqvae'
-        use_labels = False
-    else:
-        cvae_config = Config()
-        model = CVAE(cvae_config).to(device)
-        model_name = 'cvae'
-        use_labels = True
+    # load model with config
+    model = MODEL_STORE[args.use_config].to(device)
+    model_name = model.config.model_name
+    use_labels = model.config.use_classes
+    ckpt_name = f"{model_name}_{args.data_flag}"
     print(f"Number of parameters: {get_parameters(model):,}")
     # import ipdb; ipdb.set_trace()
     optimizer = torch.optim.AdamW(model.parameters(), lr=args.learning_rate)
 
-    trainer = Trainer(model, optimizer, device, args, use_labels)
+    trainer = Trainer(model, optimizer, device, args, use_labels, ckpt_name)
 
     if args.state=='train' and args.wandb:
         wandb.init(
@@ -168,6 +144,8 @@ def main():
 
     if args.state == 'train':
         trainer.fit(train_loader, val_loader)
+        # save final model
+        trainer.save_checkpoint(tag="final")
     else:
         trainer.test(test_loader)
     return None
