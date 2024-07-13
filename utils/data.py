@@ -7,34 +7,31 @@ from medmnist import INFO
 import torchvision.transforms as transforms
 import numpy as np
 
-class CombinedMedMNISTDataset(Dataset):
-    def __init__(self, datasets):
-        self.datasets = datasets
+class BinaryLabelDataset(Dataset):
+    def __init__(self, dataset, target_label, info):
+        self.dataset = dataset
+        self.target_label = dict(zip(info["label"].values(), info["label"].keys()))[target_label]
+        self.target_label = int(self.target_label)
 
     def __len__(self):
-        return sum(len(dataset) for dataset in self.datasets)
+        return len(self.dataset)
 
     def __getitem__(self, idx):
-        for dataset_idx, dataset in enumerate(self.datasets):
-            if idx < len(dataset):
-                data, _ = dataset[idx]
-                return data, dataset_idx
-            idx -= len(dataset)
-        raise IndexError("Index out of range in CombinedMedMNISTDataset")
+        sample, labels = self.dataset[idx]
+        binary_label = 1 if self.target_label in labels else 0
+        binary_label = np.array([binary_label])
+        return sample, torch.tensor(binary_label)
 
 
-def get_data_loader(args = None):
-    batch_size = args.batch_size if args else 32
-    data_flag = args.data_flag if args else 'pathmnist'
-
-    # ensure data_flag is list
-    if not isinstance(data_flag, list):
-        data_flag = [data_flag]
+def get_data_loader(args):
+    batch_size = args.batch_size if hasattr(args,"batch_size") else 64
+    data_flag = args.data_flag if hasattr(args, "data_flag") else 'pathmnist'
+    info = INFO[data_flag]
 
     # assumes all datasets have same number of channels
-    info = INFO[data_flag[0]]
     n_channels = info['n_channels']
-    n_classes = len(data_flag)
+    n_classes = 2 if args.label_to_binary else None
+    label_dict = {}
     download = True
 
     data_transform = transforms.Compose([
@@ -42,25 +39,29 @@ def get_data_loader(args = None):
         transforms.Normalize(mean=[.5], std=[.5])
     ])
 
-    # Handle single or multiple datasets
-    def load_datasets(split):
-        datasets = []
-        for flag in data_flag:
-            info = INFO[flag]
-            DataClass = getattr(med, info['python_class'])
-            dataset = DataClass(split=split, transform=data_transform, download=True)
-            datasets.append(dataset)
-        return CombinedMedMNISTDataset(datasets) if len(datasets) > 1 else datasets[0]
+    # Get dataset splits
+    DataClass = getattr(med, info['python_class'])
+    train_dataset = DataClass(split="train", transform=data_transform, download=True)
+    val_dataset = DataClass(split="val", transform=data_transform, download=True)
+    test_dataset = DataClass(split="test", transform=data_transform, download=True)
 
-    train_dataset = load_datasets('train')
-    val_dataset = load_datasets('val')
-    test_dataset = load_datasets('test')
+    # if label given, set label to 1 where present, 0 otherwise
+    if args.label_to_binary is not None:
+        label_dict = {
+            "0": args.label_to_binary,
+            "1": f"not_{args.label_to_binary}"     
+        }
+        train_dataset = BinaryLabelDataset(train_dataset, args.label_to_binary, info)
+        val_dataset = BinaryLabelDataset(val_dataset, args.label_to_binary, info)
+        test_dataset = BinaryLabelDataset(test_dataset, args.label_to_binary, info)
 
     train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
     val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=True)
     test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=True)
 
-    params = {'n_channels': n_channels, 'n_classes': n_classes}
+    # hardcoded for now
+
+    params = {'n_channels': n_channels, 'n_classes': n_classes, "label_dict": label_dict}
 
     return train_loader, val_loader, test_loader, params
 

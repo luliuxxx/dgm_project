@@ -8,28 +8,27 @@ class CVAE(nn.Module):
         self.config = config
         self.class_size = config.n_classes
         self.latent_channels = config.latent_channels
-        self.intermediate_dims = 7
+        self.intermediate_dims = config.intermediate_dims
 
         # Encoder: 3 input channels (RGB) + class_size for labels
         self.encoder = nn.Sequential(
-            nn.Conv2d(3 + self.class_size, 32, kernel_size=4, stride=2, padding=1),
-            nn.ReLU(),
-            nn.Conv2d(32, 64, kernel_size=4, stride=2, padding=1),
-            nn.ReLU(),
+            nn.Conv2d(3 + self.class_size, 8, kernel_size=3, stride=2),
+            nn.Conv2d(8, 16, kernel_size=3, stride=2),
+            nn.Conv2d(16, 32, kernel_size=3, stride=2),
         )
 
         # Fully connected layers for mu and logvar
-        self.fc_mu = nn.Linear(64 * self.intermediate_dims * self.intermediate_dims, self.latent_channels)
-        self.fc_logvar = nn.Linear(64 * self.intermediate_dims * self.intermediate_dims, self.latent_channels)
+        self.fc_mu = nn.Linear(32 * self.intermediate_dims * self.intermediate_dims, self.latent_channels)
+        self.fc_logvar = nn.Linear(32 * self.intermediate_dims * self.intermediate_dims, self.latent_channels)
 
         # Fully connected layer to project z and labels back to feature map
-        self.proj_fc = nn.Linear(self.latent_channels + self.class_size, 64 * 7 * 7)
+        self.proj_fc = nn.Linear(self.latent_channels + self.class_size, 32 * self.intermediate_dims * self.intermediate_dims)
 
         # Decoder: in_channels = 64, out_channels = 3 (RGB)
         self.decoder = nn.Sequential(
-            nn.ConvTranspose2d(64, 32, kernel_size=4, stride=2, padding=1),
-            nn.ReLU(),
-            nn.ConvTranspose2d(32, 3, kernel_size=4, stride=2, padding=1),
+            nn.ConvTranspose2d(32, 16, kernel_size=4, stride=2),
+            nn.ConvTranspose2d(16, 8, kernel_size=3, stride=2),
+            nn.ConvTranspose2d(8, 3, kernel_size=3, stride=2, output_padding=1),
             nn.Tanh()  # Assuming output is normalized between -1 and 1
         )
 
