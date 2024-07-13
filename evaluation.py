@@ -1,6 +1,7 @@
 import torch
 from configs import MODEL_STORE
 from utils.data import get_data_loader
+import torchvision.transforms as transforms
 
 from argparse import ArgumentParser
 import numpy as np
@@ -34,7 +35,10 @@ def generate_samples_for_label(model, label, num_samples=8):
 
     labels = list(label) * num_samples
     labels = torch.tensor(labels).reshape(num_samples, 1)
-    return model.generate(num_samples, labels)
+
+    # get samples
+    samples = model.generate(num_samples, labels)
+    return samples
 
 
 def load_samples_for_label(dataloader, label_to_filter=None, num_samples=8):
@@ -58,13 +62,15 @@ def plot_n_save_samples(generated_images, real_images, title, num_samples, filen
         img_gen = generated_images[i].detach().cpu().numpy().transpose(1, 2, 0)
         axes[i, 0].imshow(img_gen)
         axes[i, 0].axis('off')
-        axes[i, 0].set_title("Generated")
+        if i == 0:
+            axes[i, 0].set_title("Generated")
 
         # Plot real images
         img_real = real_images[i].detach().cpu().numpy().transpose(1, 2, 0)
         axes[i, 1].imshow(img_real)
         axes[i, 1].axis('off')
-        axes[i, 1].set_title("Real")
+        if i == 0:
+            axes[i, 1].set_title("Real")
 
     plt.tight_layout(rect=[0, 0, 1, 0.96])  # Adjust layout to make room for the title
     plt.show()
@@ -103,9 +109,18 @@ if __name__ == "__main__":
         real_imgs =  load_samples_for_label(val_loader, label, num_samples)
         generated_images = generate_samples_for_label(model, label, num_samples)
 
+        # un-normalize to range 0 - 1
+        inverse_transform = transforms.Compose([
+            transforms.Normalize(mean=[-1], std=[2])  # Equivalent to (x + 1) / 2
+        ])
+        real_imgs = inverse_transform(real_imgs)
+        generated_images = inverse_transform(generated_images)
+        print(f"REAL IMGS: {torch.min(real_imgs)} - {torch.max(real_imgs)}")
+        print(f"REAL IMGS: {torch.min(generated_images)} - {torch.max(generated_images)}")
+
         # plot and save
         title = f"{args.model_name} with {args.data_flag} conditioned on {label_name}" if args.label_to_binary else f"{args.model_name} on {args.data_flag}" 
-        filename = f"{args.model_name}_{args.use_config}_{args.data_flag}_{label}"
+        filename = f"{args.model_name}_{args.use_config}_{args.data_flag}_{label_name}"
         plot_n_save_samples(generated_images, real_imgs, title, num_samples, filename)
 
 

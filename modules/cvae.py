@@ -6,35 +6,32 @@ class CVAE(nn.Module):
     def __init__(self, config):
         super().__init__()
         self.config = config
-        self.input_channels = config.input_channels if hasattr(config, "input_channels") else 3
-        self.class_size = config.class_size if hasattr(config, "class_size") else 3
-        self.output_channels = config.output_channels if hasattr(config, 'output_channels') else 3
-        self.latent_channels = config.latent_channels if hasattr(config, 'latent_channels') else 64
-        self.hidden_channels = config.hidden_channels if hasattr(config, 'hidden_channels') else [32, 64, 128, 256]
-        self.intermediate_dims = 4 # assuming 28x28 input, 4 downsample layers, then after encoder convolution, the output is B, C, 7, 7
+        self.class_size = config.n_classes
+        self.latent_channels = config.latent_channels
+        self.intermediate_dims = 7
 
-        encoder_modules = []
-        for i in range(len(self.hidden_channels)):
-            if i == 0:
-                encoder_modules.append(nn.Conv2d(self.input_channels + self.class_size, self.hidden_channels[i], 3, 1, 1))
-            else:
-                encoder_modules.append(nn.Conv2d(self.hidden_channels[i-1], self.hidden_channels[i], 3, 2, 1))
-            encoder_modules.append(nn.BatchNorm2d(self.hidden_channels[i]))
-            encoder_modules.append(nn.ReLU())
-        self.encoder = nn.Sequential(*encoder_modules)
+        # Encoder: 3 input channels (RGB) + class_size for labels
+        self.encoder = nn.Sequential(
+            nn.Conv2d(3 + self.class_size, 32, kernel_size=4, stride=2, padding=1),
+            nn.ReLU(),
+            nn.Conv2d(32, 64, kernel_size=4, stride=2, padding=1),
+            nn.ReLU(),
+        )
 
-        # FC layers for mu and logvar
-        self.fc_mu = nn.Linear(self.hidden_channels[-1] * self.intermediate_dims * self.intermediate_dims, self.latent_channels)
-        self.fc_logvar = nn.Linear(self.hidden_channels[-1] * self.intermediate_dims * self.intermediate_dims, self.latent_channels)
-        self.proj_fc = nn.Linear(self.latent_channels + self.class_size, self.hidden_channels[-1] * self.intermediate_dims * self.intermediate_dims)
-        # Decoder definition
-        decoder_modules = []
-        for i in range(len(self.hidden_channels) - 1, 0, -1):
-            decoder_modules.append(nn.ConvTranspose2d(self.hidden_channels[i], self.hidden_channels[i-1], 3, 2, 1))
-            decoder_modules.append(nn.BatchNorm2d(self.hidden_channels[i-1]))
-            decoder_modules.append(nn.ReLU())
-        decoder_modules.append(nn.ConvTranspose2d(self.hidden_channels[0], self.output_channels, 4, 1, 0))
-        self.decoder = nn.Sequential(*decoder_modules)
+        # Fully connected layers for mu and logvar
+        self.fc_mu = nn.Linear(64 * self.intermediate_dims * self.intermediate_dims, self.latent_channels)
+        self.fc_logvar = nn.Linear(64 * self.intermediate_dims * self.intermediate_dims, self.latent_channels)
+
+        # Fully connected layer to project z and labels back to feature map
+        self.proj_fc = nn.Linear(self.latent_channels + self.class_size, 64 * 7 * 7)
+
+        # Decoder: in_channels = 64, out_channels = 3 (RGB)
+        self.decoder = nn.Sequential(
+            nn.ConvTranspose2d(64, 32, kernel_size=4, stride=2, padding=1),
+            nn.ReLU(),
+            nn.ConvTranspose2d(32, 3, kernel_size=4, stride=2, padding=1),
+            nn.Tanh()  # Assuming output is normalized between -1 and 1
+        )
 
     def one_hot(self, labels, class_size):
         targets = torch.zeros(labels.size(0), class_size)
@@ -74,7 +71,7 @@ class CVAE(nn.Module):
         return loss, x_hat
 
     def compute_loss(self, x, x_hat, mu, logvar):
-        mse = F.mse_loss(x_hat, x, reduction='mean')
+        mse = F.mse_loss(x_hat, x, reduction='sum')
         kld = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
         return mse + kld
 

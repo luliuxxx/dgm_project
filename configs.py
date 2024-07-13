@@ -10,12 +10,20 @@ class Config:
         for k, v in kwargs.items():
             setattr(self, k, v)
 
+CVAE_RGB_S = Config(
+    model_name = "cvae",
+    input_channels = 3,
+    output_channels = 3,
+    latent_channels = 32,
+    hidden_channels = [8, 16],
+    n_classes = 2,
+    use_classes = True
+)
 CVAE_RGB = Config(
     model_name = "cvae",
     input_channels = 3,
     output_channels = 3,
-    latent_channels = 64,
-    hidden_channels = [32, 64, 128, 256],
+    latent_channels = 32,
     n_classes = 2,
     use_classes = True
 )
