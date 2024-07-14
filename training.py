@@ -94,8 +94,11 @@ class Trainer():
                 loss, x_hats = self.model(x, labels)
             else:
                 loss, x_hats = self.model(x)
-            loss, x_hat = self.model(x)
-            print(f'Test Loss: {loss.item()}')
+            if self.args.wandb:
+                wandb_images_x_hat = wandb.Image(x_hats, caption='generated')
+                wandb_images_x = wandb.Image(x, caption='original')
+                wandb.log({"original": wandb_images_x,"generated": wandb_images_x_hat})
+                wandb.log({"test loss": loss})
         return None
 
 def main():
@@ -104,10 +107,10 @@ def main():
     parser = ArgumentParser()
 
     # training arguments
-    parser.add_argument('--batch_size', type=int, default=128)
+    parser.add_argument('--batch_size', type=int, default=256)
     parser.add_argument('--eval_freq', type=int, default=5)
-    parser.add_argument('--ckpt_freq', type=int, default=100)
-    parser.add_argument('--max_epochs', type=int, default=10)
+    parser.add_argument('--ckpt_freq', type=int, default=10)
+    parser.add_argument('--max_epochs', type=int, default=20)
     parser.add_argument('--learning_rate','--lr', type=float, default=1e-3)
     parser.add_argument('--wandb', type=int, default=0, choices=[0, 1])
     parser.add_argument('--state', type=str, default='train', choices=['train', 'test'])
@@ -133,7 +136,7 @@ def main():
 
     trainer = Trainer(model, optimizer, device, args, use_labels, ckpt_name)
 
-    if args.state=='train' and args.wandb:
+    if args.wandb:
         wandb.init(
             project = 'dgm_project',
             config = {
@@ -147,6 +150,10 @@ def main():
         # save final model
         trainer.save_checkpoint(tag="final")
     else:
+        # load model
+        ckpt_path = f'./logs/checkpoints/{ckpt_name}_final.pt'
+        model.load_state_dict(torch.load(ckpt_path, map_location=device))
+        trainer.model = model
         trainer.test(test_loader)
     return None
 

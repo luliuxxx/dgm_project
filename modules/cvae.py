@@ -32,11 +32,11 @@ class CVAE(nn.Module):
             nn.Tanh()  # Assuming output is normalized between -1 and 1
         )
 
-    def one_hot(self, labels, class_size):
-        targets = torch.zeros(labels.size(0), class_size)
-        for i, label in enumerate(labels):
-            targets[i, label] = 1
-        return targets.to(labels.device)
+
+    def one_hot(self,labels, class_size):
+        targets = torch.zeros(labels.size(0), class_size, device=labels.device)
+        targets = targets.scatter_(1, labels, 1)
+        return targets
 
     def encode(self, x, labels):
         one_hot_labels = self.one_hot(labels, self.class_size)
@@ -71,9 +71,9 @@ class CVAE(nn.Module):
 
     def compute_loss(self, x, x_hat, mu, logvar):
         mse = F.mse_loss(x_hat, x, reduction='sum')
-        kld = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
+        kld =torch.mean(-0.5 * torch.sum(1 + logvar - mu ** 2 - logvar.exp(), dim = 1), dim = 0)
         return mse + kld
-
+ 
     def generate(self, num_samples, labels):
         # Sample from the latent space
         z = torch.randn(num_samples, self.latent_channels).to(next(self.parameters()).device)
