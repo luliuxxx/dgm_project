@@ -1,0 +1,441 @@
+2024-07-14 22:32:55,923 INFO    StreamThr :202892 [internal.py:wandb_internal():85] W&B internal server running at pid: 202892, started at: 2024-07-14 22:32:55.922796
+2024-07-14 22:32:55,924 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: status
+2024-07-14 22:32:55,927 INFO    WriterThread:202892 [datastore.py:open_for_write():87] open: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/run-qweq5jjv.wandb
+2024-07-14 22:32:55,928 DEBUG   SenderThread:202892 [sender.py:send():379] send: header
+2024-07-14 22:32:55,946 DEBUG   SenderThread:202892 [sender.py:send():379] send: run
+2024-07-14 22:32:56,298 INFO    SenderThread:202892 [dir_watcher.py:__init__():211] watching files in: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files
+2024-07-14 22:32:56,298 INFO    SenderThread:202892 [sender.py:_start_run_threads():1188] run started: qweq5jjv with start time 1720989175.922964
+2024-07-14 22:32:56,308 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: check_version
+2024-07-14 22:32:56,309 DEBUG   SenderThread:202892 [sender.py:send_request():406] send_request: check_version
+2024-07-14 22:32:56,377 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: run_start
+2024-07-14 22:32:56,378 DEBUG   HandlerThread:202892 [system_info.py:__init__():26] System info init
+2024-07-14 22:32:56,378 DEBUG   HandlerThread:202892 [system_info.py:__init__():41] System info init done
+2024-07-14 22:32:56,378 INFO    HandlerThread:202892 [system_monitor.py:start():194] Starting system monitor
+2024-07-14 22:32:56,378 INFO    SystemMonitor:202892 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2024-07-14 22:32:56,378 INFO    HandlerThread:202892 [system_monitor.py:probe():214] Collecting system info
+2024-07-14 22:32:56,379 INFO    SystemMonitor:202892 [interfaces.py:start():188] Started cpu monitoring
+2024-07-14 22:32:56,380 INFO    SystemMonitor:202892 [interfaces.py:start():188] Started disk monitoring
+2024-07-14 22:32:56,381 INFO    SystemMonitor:202892 [interfaces.py:start():188] Started memory monitoring
+2024-07-14 22:32:56,382 INFO    SystemMonitor:202892 [interfaces.py:start():188] Started network monitoring
+2024-07-14 22:32:56,392 DEBUG   HandlerThread:202892 [system_info.py:probe():152] Probing system
+2024-07-14 22:32:56,397 DEBUG   HandlerThread:202892 [system_info.py:_probe_git():137] Probing git
+2024-07-14 22:32:56,412 DEBUG   HandlerThread:202892 [system_info.py:_probe_git():145] Probing git done
+2024-07-14 22:32:56,412 DEBUG   HandlerThread:202892 [system_info.py:probe():200] Probing system done
+2024-07-14 22:32:56,412 DEBUG   HandlerThread:202892 [system_monitor.py:probe():223] {'os': 'Linux-6.5.0-41-generic-x86_64-with-glibc2.34', 'python': '3.8.16', 'heartbeatAt': '2024-07-14T20:32:56.392467', 'startedAt': '2024-07-14T20:32:55.917374', 'docker': None, 'cuda': None, 'args': ('--data_flag', 'dermamnist', '--use_config', 'CVAE_RGB', '--label_to_binary', 'basal cell carcinoma', '--max_epochs', '100', '--wandb', '1'), 'state': 'running', 'program': 'training.py', 'codePathLocal': 'training.py', 'codePath': 'training.py', 'git': {'remote': 'https://github.com/luliuxxx/dgm_project.git', 'commit': 'f99b78cebb3a6629a561cee6cb7457ba57bcb5e3'}, 'email': 'maximilian.schindler@stud.tu-darmstadt.de', 'root': '/home/max/uni/dgm_project', 'host': 'max-ubuntu-elitebook', 'username': 'max', 'executable': '/home/max/.pyenv/versions/dgm_project/bin/python', 'cpu_count': 4, 'cpu_count_logical': 8, 'cpu_freq': {'current': 3218.6865, 'min': 400.0, 'max': 4100.0}, 'cpu_freq_per_core': [{'current': 3201.789, 'min': 400.0, 'max': 4100.0}, {'current': 3189.434, 'min': 400.0, 'max': 4100.0}, {'current': 3152.896, 'min': 400.0, 'max': 4100.0}, {'current': 3196.279, 'min': 400.0, 'max': 4100.0}, {'current': 3200.361, 'min': 400.0, 'max': 4100.0}, {'current': 3225.162, 'min': 400.0, 'max': 4100.0}, {'current': 3175.665, 'min': 400.0, 'max': 4100.0}, {'current': 3189.311, 'min': 400.0, 'max': 4100.0}], 'disk': {'/': {'total': 303.62889862060547, 'used': 114.68674087524414}}, 'memory': {'total': 15.430286407470703}}
+2024-07-14 22:32:56,412 INFO    HandlerThread:202892 [system_monitor.py:probe():224] Finished collecting system info
+2024-07-14 22:32:56,413 INFO    HandlerThread:202892 [system_monitor.py:probe():227] Publishing system info
+2024-07-14 22:32:56,413 INFO    HandlerThread:202892 [system_monitor.py:probe():229] Finished publishing system info
+2024-07-14 22:32:56,424 DEBUG   SenderThread:202892 [sender.py:send():379] send: files
+2024-07-14 22:32:56,425 INFO    SenderThread:202892 [sender.py:_save_file():1454] saving file wandb-metadata.json with policy now
+2024-07-14 22:32:56,494 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: python_packages
+2024-07-14 22:32:56,494 DEBUG   SenderThread:202892 [sender.py:send_request():406] send_request: python_packages
+2024-07-14 22:32:56,494 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: stop_status
+2024-07-14 22:32:56,495 DEBUG   SenderThread:202892 [sender.py:send_request():406] send_request: stop_status
+2024-07-14 22:32:56,497 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:32:56,694 DEBUG   SenderThread:202892 [sender.py:send():379] send: telemetry
+2024-07-14 22:32:56,946 INFO    wandb-upload_0:202892 [upload_job.py:push():130] Uploaded file /tmp/tmp_tzmfdyrwandb/0xizdg9z-wandb-metadata.json
+2024-07-14 22:32:57,301 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_created():271] file/dir created: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:32:57,301 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_created():271] file/dir created: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/wandb-metadata.json
+2024-07-14 22:32:57,302 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_created():271] file/dir created: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/requirements.txt
+2024-07-14 22:32:57,495 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:32:58,495 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:32:59,299 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:32:59,495 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:00,495 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:00,952 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: status_report
+2024-07-14 22:33:01,300 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:33:01,495 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:02,497 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:03,304 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:33:03,496 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:04,496 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:05,496 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:05,781 DEBUG   SenderThread:202892 [sender.py:send():379] send: files
+2024-07-14 22:33:05,781 INFO    SenderThread:202892 [sender.py:_save_file():1454] saving file media/images/original_0_206c1805e20ab6c7b343.png with policy now
+2024-07-14 22:33:05,823 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: partial_history
+2024-07-14 22:33:05,824 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: partial_history
+2024-07-14 22:33:05,824 DEBUG   SenderThread:202892 [sender.py:send():379] send: files
+2024-07-14 22:33:05,825 INFO    SenderThread:202892 [sender.py:_save_file():1454] saving file media/images/reconstructed_0_4c893099c5df01ef4e4a.png with policy now
+2024-07-14 22:33:05,825 DEBUG   SenderThread:202892 [sender.py:send():379] send: history
+2024-07-14 22:33:05,826 DEBUG   SenderThread:202892 [sender.py:send_request():406] send_request: summary_record
+2024-07-14 22:33:05,828 INFO    SenderThread:202892 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-07-14 22:33:05,829 DEBUG   SenderThread:202892 [sender.py:send():379] send: history
+2024-07-14 22:33:05,829 DEBUG   SenderThread:202892 [sender.py:send_request():406] send_request: summary_record
+2024-07-14 22:33:05,834 INFO    SenderThread:202892 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-07-14 22:33:06,003 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: status_report
+2024-07-14 22:33:06,305 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_created():271] file/dir created: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/wandb-summary.json
+2024-07-14 22:33:06,305 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_created():271] file/dir created: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/media/images/reconstructed_0_4c893099c5df01ef4e4a.png
+2024-07-14 22:33:06,305 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_created():271] file/dir created: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/media/images/original_0_206c1805e20ab6c7b343.png
+2024-07-14 22:33:06,306 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_created():271] file/dir created: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/media
+2024-07-14 22:33:06,306 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_created():271] file/dir created: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/media/images
+2024-07-14 22:33:06,496 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:06,539 INFO    wandb-upload_0:202892 [upload_job.py:push():130] Uploaded file /tmp/tmp_tzmfdyrwandb/qg0koul1-media/images/original_0_206c1805e20ab6c7b343.png
+2024-07-14 22:33:06,603 INFO    wandb-upload_1:202892 [upload_job.py:push():130] Uploaded file /tmp/tmp_tzmfdyrwandb/5g7xemn5-media/images/reconstructed_0_4c893099c5df01ef4e4a.png
+2024-07-14 22:33:07,199 INFO    wandb-upload_0:202892 [upload_job.py:push():130] Uploaded file /tmp/tmp_tzmfdyrwandb/qccnabsw-media/images/original_0_206c1805e20ab6c7b343.png
+2024-07-14 22:33:07,305 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:33:07,497 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:07,871 INFO    wandb-upload_1:202892 [upload_job.py:push():130] Uploaded file /tmp/tmp_tzmfdyrwandb/05o671s4-media/images/reconstructed_0_4c893099c5df01ef4e4a.png
+2024-07-14 22:33:08,497 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:09,307 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:33:09,497 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:10,498 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:11,147 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: status_report
+2024-07-14 22:33:11,308 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:33:11,494 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: stop_status
+2024-07-14 22:33:11,495 DEBUG   SenderThread:202892 [sender.py:send_request():406] send_request: stop_status
+2024-07-14 22:33:11,497 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:12,497 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:13,309 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:33:13,497 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:14,497 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:15,310 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:33:15,498 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:16,247 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: status_report
+2024-07-14 22:33:16,498 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:17,311 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:33:17,498 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:18,498 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:19,312 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:33:19,498 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:20,498 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:21,288 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: status_report
+2024-07-14 22:33:21,313 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:33:21,499 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:22,499 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:23,314 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:33:23,499 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:24,500 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:25,315 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:33:25,499 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:26,495 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: stop_status
+2024-07-14 22:33:26,495 DEBUG   SenderThread:202892 [sender.py:send_request():406] send_request: stop_status
+2024-07-14 22:33:26,500 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:26,678 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: status_report
+2024-07-14 22:33:27,316 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:33:27,317 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/config.yaml
+2024-07-14 22:33:27,500 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:28,500 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:29,479 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: partial_history
+2024-07-14 22:33:29,480 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: partial_history
+2024-07-14 22:33:29,481 DEBUG   SenderThread:202892 [sender.py:send():379] send: files
+2024-07-14 22:33:29,481 INFO    SenderThread:202892 [sender.py:_save_file():1454] saving file media/images/original_2_12c095c3dca425da222e.png with policy now
+2024-07-14 22:33:29,482 DEBUG   SenderThread:202892 [sender.py:send():379] send: files
+2024-07-14 22:33:29,482 INFO    SenderThread:202892 [sender.py:_save_file():1454] saving file media/images/reconstructed_2_60d479fe1b9df3c214be.png with policy now
+2024-07-14 22:33:29,482 DEBUG   SenderThread:202892 [sender.py:send():379] send: history
+2024-07-14 22:33:29,482 DEBUG   SenderThread:202892 [sender.py:send_request():406] send_request: summary_record
+2024-07-14 22:33:29,485 INFO    SenderThread:202892 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-07-14 22:33:29,485 DEBUG   SenderThread:202892 [sender.py:send():379] send: history
+2024-07-14 22:33:29,485 DEBUG   SenderThread:202892 [sender.py:send_request():406] send_request: summary_record
+2024-07-14 22:33:29,486 INFO    SenderThread:202892 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-07-14 22:33:29,500 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:30,172 INFO    wandb-upload_1:202892 [upload_job.py:push():130] Uploaded file /tmp/tmp_tzmfdyrwandb/i62noya0-media/images/reconstructed_2_60d479fe1b9df3c214be.png
+2024-07-14 22:33:30,185 INFO    wandb-upload_0:202892 [upload_job.py:push():130] Uploaded file /tmp/tmp_tzmfdyrwandb/byh3bjzz-media/images/original_2_12c095c3dca425da222e.png
+2024-07-14 22:33:30,318 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/wandb-summary.json
+2024-07-14 22:33:30,318 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_created():271] file/dir created: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/media/images/reconstructed_2_60d479fe1b9df3c214be.png
+2024-07-14 22:33:30,319 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_created():271] file/dir created: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/media/images/original_2_12c095c3dca425da222e.png
+2024-07-14 22:33:30,319 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/media/images
+2024-07-14 22:33:30,500 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:30,912 INFO    wandb-upload_0:202892 [upload_job.py:push():130] Uploaded file /tmp/tmp_tzmfdyrwandb/jriyz0gg-media/images/original_2_12c095c3dca425da222e.png
+2024-07-14 22:33:30,919 INFO    wandb-upload_1:202892 [upload_job.py:push():130] Uploaded file /tmp/tmp_tzmfdyrwandb/9sv0unyt-media/images/reconstructed_2_60d479fe1b9df3c214be.png
+2024-07-14 22:33:31,318 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:33:31,500 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:31,900 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: status_report
+2024-07-14 22:33:32,500 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:33,319 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:33:33,500 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:34,500 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:35,320 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:33:35,500 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:36,501 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:36,940 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: status_report
+2024-07-14 22:33:37,321 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:33:37,501 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:38,501 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:39,322 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:33:39,501 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:40,501 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:41,323 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:33:41,495 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: stop_status
+2024-07-14 22:33:41,495 DEBUG   SenderThread:202892 [sender.py:send_request():406] send_request: stop_status
+2024-07-14 22:33:41,501 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:41,991 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: status_report
+2024-07-14 22:33:42,501 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:43,324 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:33:43,501 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:44,501 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:45,325 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:33:45,501 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:46,502 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:47,120 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: status_report
+2024-07-14 22:33:47,326 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:33:47,502 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:48,502 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:49,327 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:33:49,502 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:50,502 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:50,991 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: partial_history
+2024-07-14 22:33:50,991 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: partial_history
+2024-07-14 22:33:50,993 DEBUG   SenderThread:202892 [sender.py:send():379] send: files
+2024-07-14 22:33:50,993 INFO    SenderThread:202892 [sender.py:_save_file():1454] saving file media/images/original_4_bea8ce5b657b4152f32e.png with policy now
+2024-07-14 22:33:50,993 DEBUG   SenderThread:202892 [sender.py:send():379] send: files
+2024-07-14 22:33:50,993 INFO    SenderThread:202892 [sender.py:_save_file():1454] saving file media/images/reconstructed_4_f2fd38147b8d5ad6b255.png with policy now
+2024-07-14 22:33:50,993 DEBUG   SenderThread:202892 [sender.py:send():379] send: history
+2024-07-14 22:33:50,994 DEBUG   SenderThread:202892 [sender.py:send_request():406] send_request: summary_record
+2024-07-14 22:33:50,996 INFO    SenderThread:202892 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-07-14 22:33:50,996 DEBUG   SenderThread:202892 [sender.py:send():379] send: history
+2024-07-14 22:33:50,997 DEBUG   SenderThread:202892 [sender.py:send_request():406] send_request: summary_record
+2024-07-14 22:33:51,000 INFO    SenderThread:202892 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-07-14 22:33:51,328 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/wandb-summary.json
+2024-07-14 22:33:51,329 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_created():271] file/dir created: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/media/images/reconstructed_4_f2fd38147b8d5ad6b255.png
+2024-07-14 22:33:51,329 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_created():271] file/dir created: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/media/images/original_4_bea8ce5b657b4152f32e.png
+2024-07-14 22:33:51,330 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/media/images
+2024-07-14 22:33:51,502 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:51,699 INFO    wandb-upload_0:202892 [upload_job.py:push():130] Uploaded file /tmp/tmp_tzmfdyrwandb/eutmyhsp-media/images/original_4_bea8ce5b657b4152f32e.png
+2024-07-14 22:33:51,700 INFO    wandb-upload_1:202892 [upload_job.py:push():130] Uploaded file /tmp/tmp_tzmfdyrwandb/7oanchqu-media/images/reconstructed_4_f2fd38147b8d5ad6b255.png
+2024-07-14 22:33:52,161 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: status_report
+2024-07-14 22:33:52,314 INFO    wandb-upload_1:202892 [upload_job.py:push():130] Uploaded file /tmp/tmp_tzmfdyrwandb/1cxv1qsi-media/images/reconstructed_4_f2fd38147b8d5ad6b255.png
+2024-07-14 22:33:52,316 INFO    wandb-upload_0:202892 [upload_job.py:push():130] Uploaded file /tmp/tmp_tzmfdyrwandb/qes9rto3-media/images/original_4_bea8ce5b657b4152f32e.png
+2024-07-14 22:33:52,502 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:53,329 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:33:53,502 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:54,502 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:55,331 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:33:55,503 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:56,383 DEBUG   SystemMonitor:202892 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2024-07-14 22:33:56,384 DEBUG   SenderThread:202892 [sender.py:send():379] send: stats
+2024-07-14 22:33:56,495 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: stop_status
+2024-07-14 22:33:56,495 DEBUG   SenderThread:202892 [sender.py:send_request():406] send_request: stop_status
+2024-07-14 22:33:56,503 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:57,191 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: status_report
+2024-07-14 22:33:57,332 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:33:57,503 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:58,503 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:33:59,339 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:33:59,503 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:34:00,503 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:34:01,340 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:34:01,503 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:34:02,228 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: status_report
+2024-07-14 22:34:02,504 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:34:03,341 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:34:03,504 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:34:04,504 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:34:05,343 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:34:05,504 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:34:06,504 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:34:07,240 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: status_report
+2024-07-14 22:34:07,344 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:34:07,504 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:34:08,504 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:34:09,345 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:34:09,504 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:34:10,504 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:34:11,346 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:34:11,495 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: stop_status
+2024-07-14 22:34:11,495 DEBUG   SenderThread:202892 [sender.py:send_request():406] send_request: stop_status
+2024-07-14 22:34:11,505 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:34:12,505 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:34:12,770 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: status_report
+2024-07-14 22:34:13,347 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:34:13,505 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:34:14,143 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: partial_history
+2024-07-14 22:34:14,144 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: partial_history
+2024-07-14 22:34:14,145 DEBUG   SenderThread:202892 [sender.py:send():379] send: files
+2024-07-14 22:34:14,145 INFO    SenderThread:202892 [sender.py:_save_file():1454] saving file media/images/original_6_7f0d9556b776ad0bd1fe.png with policy now
+2024-07-14 22:34:14,146 DEBUG   SenderThread:202892 [sender.py:send():379] send: files
+2024-07-14 22:34:14,146 INFO    SenderThread:202892 [sender.py:_save_file():1454] saving file media/images/reconstructed_6_51b7307b7394a43363f1.png with policy now
+2024-07-14 22:34:14,147 DEBUG   SenderThread:202892 [sender.py:send():379] send: history
+2024-07-14 22:34:14,147 DEBUG   SenderThread:202892 [sender.py:send_request():406] send_request: summary_record
+2024-07-14 22:34:14,148 INFO    SenderThread:202892 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-07-14 22:34:14,148 DEBUG   SenderThread:202892 [sender.py:send():379] send: history
+2024-07-14 22:34:14,149 DEBUG   SenderThread:202892 [sender.py:send_request():406] send_request: summary_record
+2024-07-14 22:34:14,150 INFO    SenderThread:202892 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-07-14 22:34:14,348 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/wandb-summary.json
+2024-07-14 22:34:14,348 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_created():271] file/dir created: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/media/images/reconstructed_6_51b7307b7394a43363f1.png
+2024-07-14 22:34:14,348 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_created():271] file/dir created: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/media/images/original_6_7f0d9556b776ad0bd1fe.png
+2024-07-14 22:34:14,349 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/media/images
+2024-07-14 22:34:14,505 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:34:14,734 INFO    wandb-upload_1:202892 [upload_job.py:push():130] Uploaded file /tmp/tmp_tzmfdyrwandb/4d2gw97o-media/images/original_6_7f0d9556b776ad0bd1fe.png
+2024-07-14 22:34:14,735 INFO    wandb-upload_0:202892 [upload_job.py:push():130] Uploaded file /tmp/tmp_tzmfdyrwandb/zbz7z8lx-media/images/reconstructed_6_51b7307b7394a43363f1.png
+2024-07-14 22:34:15,348 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:34:15,505 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:34:15,764 INFO    wandb-upload_1:202892 [upload_job.py:push():130] Uploaded file /tmp/tmp_tzmfdyrwandb/058ponkm-media/images/original_6_7f0d9556b776ad0bd1fe.png
+2024-07-14 22:34:16,480 INFO    wandb-upload_0:202892 [upload_job.py:push():130] Uploaded file /tmp/tmp_tzmfdyrwandb/5tpyz1uo-media/images/reconstructed_6_51b7307b7394a43363f1.png
+2024-07-14 22:34:16,505 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:34:17,349 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:34:17,505 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:34:17,787 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: status_report
+2024-07-14 22:34:18,505 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:34:19,350 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:34:19,506 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:34:20,506 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:34:21,351 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:34:21,543 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:34:22,506 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:34:22,862 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: status_report
+2024-07-14 22:34:23,352 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:34:23,506 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:34:24,506 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:34:25,354 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:34:25,506 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:34:26,385 DEBUG   SenderThread:202892 [sender.py:send():379] send: stats
+2024-07-14 22:34:26,495 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: stop_status
+2024-07-14 22:34:26,496 DEBUG   SenderThread:202892 [sender.py:send_request():406] send_request: stop_status
+2024-07-14 22:34:26,507 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:34:27,355 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:34:27,507 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:34:27,914 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: status_report
+2024-07-14 22:34:28,507 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:34:29,356 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:34:29,507 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:34:30,507 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:34:31,357 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:34:31,547 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:34:32,507 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:34:32,891 DEBUG   SenderThread:202892 [sender.py:send():379] send: exit
+2024-07-14 22:34:32,892 INFO    SenderThread:202892 [sender.py:send_exit():586] handling exit code: 255
+2024-07-14 22:34:32,892 INFO    SenderThread:202892 [sender.py:send_exit():588] handling runtime: 96
+2024-07-14 22:34:32,892 INFO    SenderThread:202892 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-07-14 22:34:32,892 INFO    SenderThread:202892 [sender.py:send_exit():594] send defer
+2024-07-14 22:34:32,892 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: defer
+2024-07-14 22:34:32,893 INFO    HandlerThread:202892 [handler.py:handle_request_defer():184] handle defer: 0
+2024-07-14 22:34:32,893 DEBUG   SenderThread:202892 [sender.py:send_request():406] send_request: defer
+2024-07-14 22:34:32,893 INFO    SenderThread:202892 [sender.py:send_request_defer():610] handle sender defer: 0
+2024-07-14 22:34:32,893 INFO    SenderThread:202892 [sender.py:transition_state():614] send defer: 1
+2024-07-14 22:34:32,893 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: defer
+2024-07-14 22:34:32,893 INFO    HandlerThread:202892 [handler.py:handle_request_defer():184] handle defer: 1
+2024-07-14 22:34:32,893 DEBUG   SenderThread:202892 [sender.py:send_request():406] send_request: defer
+2024-07-14 22:34:32,893 INFO    SenderThread:202892 [sender.py:send_request_defer():610] handle sender defer: 1
+2024-07-14 22:34:32,894 INFO    SenderThread:202892 [sender.py:transition_state():614] send defer: 2
+2024-07-14 22:34:32,894 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: defer
+2024-07-14 22:34:32,894 INFO    HandlerThread:202892 [handler.py:handle_request_defer():184] handle defer: 2
+2024-07-14 22:34:32,894 INFO    HandlerThread:202892 [system_monitor.py:finish():203] Stopping system monitor
+2024-07-14 22:34:32,894 DEBUG   SystemMonitor:202892 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2024-07-14 22:34:32,894 INFO    HandlerThread:202892 [interfaces.py:finish():200] Joined cpu monitor
+2024-07-14 22:34:32,894 DEBUG   SystemMonitor:202892 [system_monitor.py:_start():183] Publishing last batch of metrics
+2024-07-14 22:34:32,895 INFO    HandlerThread:202892 [interfaces.py:finish():200] Joined disk monitor
+2024-07-14 22:34:32,895 INFO    HandlerThread:202892 [interfaces.py:finish():200] Joined memory monitor
+2024-07-14 22:34:32,896 INFO    HandlerThread:202892 [interfaces.py:finish():200] Joined network monitor
+2024-07-14 22:34:32,896 DEBUG   SenderThread:202892 [sender.py:send_request():406] send_request: defer
+2024-07-14 22:34:32,896 INFO    SenderThread:202892 [sender.py:send_request_defer():610] handle sender defer: 2
+2024-07-14 22:34:32,896 INFO    SenderThread:202892 [sender.py:transition_state():614] send defer: 3
+2024-07-14 22:34:32,896 DEBUG   SenderThread:202892 [sender.py:send():379] send: stats
+2024-07-14 22:34:32,897 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: defer
+2024-07-14 22:34:32,897 INFO    HandlerThread:202892 [handler.py:handle_request_defer():184] handle defer: 3
+2024-07-14 22:34:32,897 DEBUG   SenderThread:202892 [sender.py:send_request():406] send_request: defer
+2024-07-14 22:34:32,898 INFO    SenderThread:202892 [sender.py:send_request_defer():610] handle sender defer: 3
+2024-07-14 22:34:32,898 INFO    SenderThread:202892 [sender.py:transition_state():614] send defer: 4
+2024-07-14 22:34:32,898 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: defer
+2024-07-14 22:34:32,898 INFO    HandlerThread:202892 [handler.py:handle_request_defer():184] handle defer: 4
+2024-07-14 22:34:32,898 DEBUG   SenderThread:202892 [sender.py:send_request():406] send_request: defer
+2024-07-14 22:34:32,898 INFO    SenderThread:202892 [sender.py:send_request_defer():610] handle sender defer: 4
+2024-07-14 22:34:32,898 INFO    SenderThread:202892 [sender.py:transition_state():614] send defer: 5
+2024-07-14 22:34:32,898 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: defer
+2024-07-14 22:34:32,898 INFO    HandlerThread:202892 [handler.py:handle_request_defer():184] handle defer: 5
+2024-07-14 22:34:32,899 DEBUG   SenderThread:202892 [sender.py:send():379] send: summary
+2024-07-14 22:34:32,899 INFO    SenderThread:202892 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-07-14 22:34:32,900 DEBUG   SenderThread:202892 [sender.py:send_request():406] send_request: defer
+2024-07-14 22:34:32,900 INFO    SenderThread:202892 [sender.py:send_request_defer():610] handle sender defer: 5
+2024-07-14 22:34:32,900 INFO    SenderThread:202892 [sender.py:transition_state():614] send defer: 6
+2024-07-14 22:34:32,900 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: defer
+2024-07-14 22:34:32,900 INFO    HandlerThread:202892 [handler.py:handle_request_defer():184] handle defer: 6
+2024-07-14 22:34:32,901 DEBUG   SenderThread:202892 [sender.py:send_request():406] send_request: defer
+2024-07-14 22:34:32,901 INFO    SenderThread:202892 [sender.py:send_request_defer():610] handle sender defer: 6
+2024-07-14 22:34:32,901 INFO    SenderThread:202892 [sender.py:transition_state():614] send defer: 7
+2024-07-14 22:34:32,901 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: status_report
+2024-07-14 22:34:32,901 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: defer
+2024-07-14 22:34:32,901 INFO    HandlerThread:202892 [handler.py:handle_request_defer():184] handle defer: 7
+2024-07-14 22:34:32,902 DEBUG   SenderThread:202892 [sender.py:send_request():406] send_request: defer
+2024-07-14 22:34:32,902 INFO    SenderThread:202892 [sender.py:send_request_defer():610] handle sender defer: 7
+2024-07-14 22:34:33,358 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/wandb-summary.json
+2024-07-14 22:34:33,358 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:34:33,892 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: poll_exit
+2024-07-14 22:34:35,254 INFO    SenderThread:202892 [sender.py:transition_state():614] send defer: 8
+2024-07-14 22:34:35,255 DEBUG   SenderThread:202892 [sender.py:send_request():406] send_request: poll_exit
+2024-07-14 22:34:35,255 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: defer
+2024-07-14 22:34:35,255 INFO    HandlerThread:202892 [handler.py:handle_request_defer():184] handle defer: 8
+2024-07-14 22:34:35,255 DEBUG   SenderThread:202892 [sender.py:send_request():406] send_request: defer
+2024-07-14 22:34:35,255 INFO    SenderThread:202892 [sender.py:send_request_defer():610] handle sender defer: 8
+2024-07-14 22:34:35,255 INFO    SenderThread:202892 [job_builder.py:build():440] Attempting to build job artifact
+2024-07-14 22:34:35,256 INFO    SenderThread:202892 [job_builder.py:_get_source_type():569] is repo sourced job
+2024-07-14 22:34:35,278 INFO    SenderThread:202892 [job_builder.py:build():545] adding wandb-job metadata file
+2024-07-14 22:34:35,283 INFO    SenderThread:202892 [sender.py:transition_state():614] send defer: 9
+2024-07-14 22:34:35,283 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: defer
+2024-07-14 22:34:35,283 INFO    HandlerThread:202892 [handler.py:handle_request_defer():184] handle defer: 9
+2024-07-14 22:34:35,284 DEBUG   SenderThread:202892 [sender.py:send():379] send: artifact
+2024-07-14 22:34:35,360 INFO    Thread-12 :202892 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:34:35,893 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: poll_exit
+2024-07-14 22:34:36,245 INFO    SenderThread:202892 [sender.py:send_artifact():1530] sent artifact job-https___github.com_luliuxxx_dgm_project.git_training.py - {'id': 'QXJ0aWZhY3Q6OTcyMTE0Nzg4', 'state': 'COMMITTED', 'artifactSequence': {'id': 'QXJ0aWZhY3RDb2xsZWN0aW9uOjI0NjcwOTIxNw==', 'latestArtifact': {'id': 'QXJ0aWZhY3Q6OTcyMzczNDEy', 'versionIndex': 8}}}
+2024-07-14 22:34:36,245 DEBUG   SenderThread:202892 [sender.py:send_request():406] send_request: defer
+2024-07-14 22:34:36,246 INFO    SenderThread:202892 [sender.py:send_request_defer():610] handle sender defer: 9
+2024-07-14 22:34:36,246 INFO    SenderThread:202892 [dir_watcher.py:finish():358] shutting down directory watcher
+2024-07-14 22:34:36,361 INFO    SenderThread:202892 [dir_watcher.py:finish():388] scan: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files
+2024-07-14 22:34:36,361 INFO    SenderThread:202892 [dir_watcher.py:finish():402] scan save: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/wandb-summary.json wandb-summary.json
+2024-07-14 22:34:36,361 INFO    SenderThread:202892 [dir_watcher.py:finish():402] scan save: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/wandb-metadata.json wandb-metadata.json
+2024-07-14 22:34:36,361 INFO    SenderThread:202892 [dir_watcher.py:finish():402] scan save: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/config.yaml config.yaml
+2024-07-14 22:34:36,361 INFO    SenderThread:202892 [dir_watcher.py:finish():402] scan save: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log output.log
+2024-07-14 22:34:36,361 INFO    SenderThread:202892 [dir_watcher.py:finish():402] scan save: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/requirements.txt requirements.txt
+2024-07-14 22:34:36,366 INFO    SenderThread:202892 [dir_watcher.py:finish():402] scan save: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/media/images/original_4_bea8ce5b657b4152f32e.png media/images/original_4_bea8ce5b657b4152f32e.png
+2024-07-14 22:34:36,368 INFO    SenderThread:202892 [dir_watcher.py:finish():402] scan save: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/media/images/reconstructed_4_f2fd38147b8d5ad6b255.png media/images/reconstructed_4_f2fd38147b8d5ad6b255.png
+2024-07-14 22:34:36,370 INFO    SenderThread:202892 [dir_watcher.py:finish():402] scan save: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/media/images/original_6_7f0d9556b776ad0bd1fe.png media/images/original_6_7f0d9556b776ad0bd1fe.png
+2024-07-14 22:34:36,370 INFO    SenderThread:202892 [dir_watcher.py:finish():402] scan save: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/media/images/original_0_206c1805e20ab6c7b343.png media/images/original_0_206c1805e20ab6c7b343.png
+2024-07-14 22:34:36,370 INFO    SenderThread:202892 [dir_watcher.py:finish():402] scan save: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/media/images/original_2_12c095c3dca425da222e.png media/images/original_2_12c095c3dca425da222e.png
+2024-07-14 22:34:36,370 INFO    SenderThread:202892 [dir_watcher.py:finish():402] scan save: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/media/images/reconstructed_0_4c893099c5df01ef4e4a.png media/images/reconstructed_0_4c893099c5df01ef4e4a.png
+2024-07-14 22:34:36,370 INFO    SenderThread:202892 [dir_watcher.py:finish():402] scan save: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/media/images/reconstructed_6_51b7307b7394a43363f1.png media/images/reconstructed_6_51b7307b7394a43363f1.png
+2024-07-14 22:34:36,371 INFO    SenderThread:202892 [dir_watcher.py:finish():402] scan save: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/media/images/reconstructed_2_60d479fe1b9df3c214be.png media/images/reconstructed_2_60d479fe1b9df3c214be.png
+2024-07-14 22:34:36,371 INFO    SenderThread:202892 [sender.py:transition_state():614] send defer: 10
+2024-07-14 22:34:36,371 DEBUG   SenderThread:202892 [sender.py:send_request():406] send_request: poll_exit
+2024-07-14 22:34:36,371 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: defer
+2024-07-14 22:34:36,371 INFO    HandlerThread:202892 [handler.py:handle_request_defer():184] handle defer: 10
+2024-07-14 22:34:36,371 DEBUG   SenderThread:202892 [sender.py:send_request():406] send_request: defer
+2024-07-14 22:34:36,371 INFO    SenderThread:202892 [sender.py:send_request_defer():610] handle sender defer: 10
+2024-07-14 22:34:36,372 INFO    SenderThread:202892 [file_pusher.py:finish():169] shutting down file pusher
+2024-07-14 22:34:36,755 INFO    wandb-upload_0:202892 [upload_job.py:push():130] Uploaded file /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/config.yaml
+2024-07-14 22:34:36,755 INFO    wandb-upload_1:202892 [upload_job.py:push():130] Uploaded file /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/wandb-summary.json
+2024-07-14 22:34:36,797 INFO    wandb-upload_3:202892 [upload_job.py:push():130] Uploaded file /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/requirements.txt
+2024-07-14 22:34:36,839 INFO    wandb-upload_2:202892 [upload_job.py:push():130] Uploaded file /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/files/output.log
+2024-07-14 22:34:36,893 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: poll_exit
+2024-07-14 22:34:36,894 DEBUG   SenderThread:202892 [sender.py:send_request():406] send_request: poll_exit
+2024-07-14 22:34:37,040 INFO    Thread-11 :202892 [sender.py:transition_state():614] send defer: 11
+2024-07-14 22:34:37,040 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: defer
+2024-07-14 22:34:37,040 INFO    HandlerThread:202892 [handler.py:handle_request_defer():184] handle defer: 11
+2024-07-14 22:34:37,041 DEBUG   SenderThread:202892 [sender.py:send_request():406] send_request: defer
+2024-07-14 22:34:37,041 INFO    SenderThread:202892 [sender.py:send_request_defer():610] handle sender defer: 11
+2024-07-14 22:34:37,041 INFO    SenderThread:202892 [file_pusher.py:join():175] waiting for file pusher
+2024-07-14 22:34:37,042 INFO    SenderThread:202892 [sender.py:transition_state():614] send defer: 12
+2024-07-14 22:34:37,042 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: defer
+2024-07-14 22:34:37,042 INFO    HandlerThread:202892 [handler.py:handle_request_defer():184] handle defer: 12
+2024-07-14 22:34:37,042 DEBUG   SenderThread:202892 [sender.py:send_request():406] send_request: defer
+2024-07-14 22:34:37,043 INFO    SenderThread:202892 [sender.py:send_request_defer():610] handle sender defer: 12
+2024-07-14 22:34:37,043 INFO    SenderThread:202892 [file_stream.py:finish():601] file stream finish called
+2024-07-14 22:34:37,268 INFO    SenderThread:202892 [file_stream.py:finish():605] file stream finish is done
+2024-07-14 22:34:37,268 INFO    SenderThread:202892 [sender.py:transition_state():614] send defer: 13
+2024-07-14 22:34:37,268 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: defer
+2024-07-14 22:34:37,268 INFO    HandlerThread:202892 [handler.py:handle_request_defer():184] handle defer: 13
+2024-07-14 22:34:37,269 DEBUG   SenderThread:202892 [sender.py:send_request():406] send_request: defer
+2024-07-14 22:34:37,269 INFO    SenderThread:202892 [sender.py:send_request_defer():610] handle sender defer: 13
+2024-07-14 22:34:37,269 INFO    SenderThread:202892 [sender.py:transition_state():614] send defer: 14
+2024-07-14 22:34:37,270 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: defer
+2024-07-14 22:34:37,270 DEBUG   SenderThread:202892 [sender.py:send():379] send: final
+2024-07-14 22:34:37,270 INFO    HandlerThread:202892 [handler.py:handle_request_defer():184] handle defer: 14
+2024-07-14 22:34:37,270 DEBUG   SenderThread:202892 [sender.py:send():379] send: footer
+2024-07-14 22:34:37,271 DEBUG   SenderThread:202892 [sender.py:send_request():406] send_request: defer
+2024-07-14 22:34:37,271 INFO    SenderThread:202892 [sender.py:send_request_defer():610] handle sender defer: 14
+2024-07-14 22:34:37,271 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: poll_exit
+2024-07-14 22:34:37,272 DEBUG   SenderThread:202892 [sender.py:send_request():406] send_request: poll_exit
+2024-07-14 22:34:37,273 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: server_info
+2024-07-14 22:34:37,273 DEBUG   SenderThread:202892 [sender.py:send_request():406] send_request: server_info
+2024-07-14 22:34:37,277 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: poll_exit
+2024-07-14 22:34:37,278 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: get_summary
+2024-07-14 22:34:37,279 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: sampled_history
+2024-07-14 22:34:37,280 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: internal_messages
+2024-07-14 22:34:37,408 DEBUG   SenderThread:202892 [sender.py:send_request():406] send_request: poll_exit
+2024-07-14 22:34:37,408 INFO    MainThread:202892 [wandb_run.py:_footer_history_summary_info():3991] rendering history
+2024-07-14 22:34:37,408 INFO    MainThread:202892 [wandb_run.py:_footer_history_summary_info():4023] rendering summary
+2024-07-14 22:34:37,408 INFO    MainThread:202892 [wandb_run.py:_footer_sync_info():3950] logging synced files
+2024-07-14 22:34:37,409 DEBUG   HandlerThread:202892 [handler.py:handle_request():158] handle_request: shutdown
+2024-07-14 22:34:37,409 INFO    HandlerThread:202892 [handler.py:finish():882] shutting down handler
+2024-07-14 22:34:38,278 INFO    WriterThread:202892 [datastore.py:close():296] close: /home/max/uni/dgm_project/wandb/run-20240714_223255-qweq5jjv/run-qweq5jjv.wandb
+2024-07-14 22:34:38,408 INFO    SenderThread:202892 [sender.py:finish():1608] shutting down sender
+2024-07-14 22:34:38,408 INFO    SenderThread:202892 [file_pusher.py:finish():169] shutting down file pusher
+2024-07-14 22:34:38,408 INFO    SenderThread:202892 [file_pusher.py:join():175] waiting for file pusher

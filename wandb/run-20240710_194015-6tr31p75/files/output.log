@@ -1,0 +1,23 @@
+
+Epoch 0
+  0%|                                                                                                                                                                                      | 0/758 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File "training.py", line 177, in <module>
+    main()
+  File "training.py", line 170, in main
+    trainer.fit(train_loader, val_loader)
+  File "training.py", line 84, in fit
+    self.train_n_iters(train_loader)
+  File "training.py", line 43, in train_n_iters
+    loss, x_hats = self.model(images, labels)
+  File "/home/max/.pyenv/versions/dgm_project/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/max/.pyenv/versions/dgm_project/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/max/uni/dgm_project/modules/cvae.py", line 69, in forward
+    mu, logvar = self.encode(x, labels)
+  File "/home/max/uni/dgm_project/modules/cvae.py", line 49, in encode
+    x = self.encoder_conv(x)
+  File "/home/max/.pyenv/versions/dgm_project/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1709, in __getattr__
+    raise AttributeError(f"'{type(self).__name__}' object has no attribute '{name}'")
+AttributeError: 'CVAE' object has no attribute 'encoder_conv'

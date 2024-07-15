@@ -1,0 +1,58 @@
+
+  3%|████▏                                                                                                                                                                 | 19/758 [00:01<01:04, 11.48it/s]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 758/758 [01:22<00:00,  9.22it/s]
+Train Loss: 0.08556155285412215, Val Loss: 0.08524742211366809
+Learning rate: [0.001]
+Traceback (most recent call last):
+  File "training.py", line 177, in <module>
+    main()
+  File "training.py", line 170, in main
+    trainer.fit(train_loader, val_loader)
+  File "training.py", line 86, in fit
+    self.evaluate(train_loader,val_loader)
+  File "/home/max/.pyenv/versions/dgm_project/lib/python3.8/site-packages/torch/utils/_contextlib.py", line 115, in decorate_context
+    return func(*args, **kwargs)
+  File "training.py", line 72, in evaluate
+    wandb_images_x_hat = wandb.Image(x_hat, caption='reconstructed')
+NameError: name 'x_hat' is not defined

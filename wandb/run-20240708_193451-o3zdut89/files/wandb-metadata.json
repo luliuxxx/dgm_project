@@ -1,0 +1,86 @@
+{
+    "os": "Linux-6.5.0-41-generic-x86_64-with-glibc2.34",
+    "python": "3.8.16",
+    "heartbeatAt": "2024-07-08T17:34:52.265942",
+    "startedAt": "2024-07-08T17:34:51.683080",
+    "docker": null,
+    "cuda": null,
+    "args": [
+        "--wandb",
+        "1",
+        "--data_flag",
+        "pathmnist",
+        "dermamnist"
+    ],
+    "state": "running",
+    "program": "training.py",
+    "codePathLocal": "training.py",
+    "codePath": "training.py",
+    "git": {
+        "remote": "https://github.com/luliuxxx/dgm_project.git",
+        "commit": "9c3b16434261964a2534371b8ee42220f8a0c619"
+    },
+    "email": "maximilian.schindler@stud.tu-darmstadt.de",
+    "root": "/home/max/uni/dgm_project",
+    "host": "max-ubuntu-elitebook",
+    "username": "max",
+    "executable": "/home/max/.pyenv/versions/dgm_project/bin/python",
+    "cpu_count": 4,
+    "cpu_count_logical": 8,
+    "cpu_freq": {
+        "current": 3782.2441249999997,
+        "min": 400.0,
+        "max": 4100.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 3686.555,
+            "min": 400.0,
+            "max": 4100.0
+        },
+        {
+            "current": 3670.945,
+            "min": 400.0,
+            "max": 4100.0
+        },
+        {
+            "current": 3375.118,
+            "min": 400.0,
+            "max": 4100.0
+        },
+        {
+            "current": 3712.064,
+            "min": 400.0,
+            "max": 4100.0
+        },
+        {
+            "current": 3486.681,
+            "min": 400.0,
+            "max": 4100.0
+        },
+        {
+            "current": 3459.71,
+            "min": 400.0,
+            "max": 4100.0
+        },
+        {
+            "current": 3738.037,
+            "min": 400.0,
+            "max": 4100.0
+        },
+        {
+            "current": 3271.213,
+            "min": 400.0,
+            "max": 4100.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 303.62889862060547,
+            "used": 112.28982162475586
+        }
+    },
+    "memory": {
+        "total": 15.430278778076172
+    }
+}

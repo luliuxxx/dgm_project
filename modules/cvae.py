@@ -10,27 +10,21 @@ class CVAE(nn.Module):
         self.latent_channels = config.latent_channels
         self.intermediate_dims = config.intermediate_dims
 
-        # Encoder: 3 input channels (RGB) + class_size for labels
-        self.encoder = nn.Sequential(
-            nn.Conv2d(3 + self.class_size, 8, kernel_size=3, stride=2),
-            nn.Conv2d(8, 16, kernel_size=3, stride=2),
-            nn.Conv2d(16, 32, kernel_size=3, stride=2),
-        )
-
-        # Fully connected layers for mu and logvar
+        # encoder layers
+        self.maxpool = nn.MaxPool2d(3, stride=2)
+        self.conv1 = nn.Conv2d(3 + self.class_size, 8, kernel_size=3, stride=1, padding="same")
+        self.conv2 = nn.Conv2d(8, 16, kernel_size=3, stride=1, padding="same")
+        self.conv3 = nn.Conv2d(16, 32, kernel_size=3, stride=1, padding="same")
         self.fc_mu = nn.Linear(32 * self.intermediate_dims * self.intermediate_dims, self.latent_channels)
         self.fc_logvar = nn.Linear(32 * self.intermediate_dims * self.intermediate_dims, self.latent_channels)
 
-        # Fully connected layer to project z and labels back to feature map
-        self.proj_fc = nn.Linear(self.latent_channels + self.class_size, 32 * self.intermediate_dims * self.intermediate_dims)
+        # decoder layers
+        self.fc_proj = nn.Linear(self.latent_channels + self.class_size, 32 * self.intermediate_dims * self.intermediate_dims)
 
-        # Decoder: in_channels = 64, out_channels = 3 (RGB)
-        self.decoder = nn.Sequential(
-            nn.ConvTranspose2d(32, 16, kernel_size=4, stride=2),
-            nn.ConvTranspose2d(16, 8, kernel_size=3, stride=2),
-            nn.ConvTranspose2d(8, 3, kernel_size=3, stride=2, output_padding=1),
-            nn.Tanh()  # Assuming output is normalized between -1 and 1
-        )
+        # convolutions
+        self.convT1 = nn.ConvTranspose2d(32, 16, kernel_size=4, stride=2, output_padding=0) #SAME PADDING
+        self.convT2 = nn.ConvTranspose2d(16, 8, kernel_size=3, stride=2, output_padding=1)
+        self.convT3 = nn.ConvTranspose2d(8, 3, kernel_size=3, stride=2, output_padding=0)
 
 
     def one_hot(self,labels, class_size):
@@ -43,10 +37,26 @@ class CVAE(nn.Module):
         one_hot_labels = one_hot_labels.unsqueeze(2).unsqueeze(3)
         one_hot_labels = one_hot_labels.repeat(1, 1, x.size(2), x.size(3))
         x = torch.cat((x, one_hot_labels), dim=1)
-        x = self.encoder(x)
+        # Conv layers 
+        x = self.conv1(x)
+        x = F.relu(x)
+        x = self.maxpool(x)
+        x = self.conv2(x)
+        x = F.relu(x)
+        x = self.maxpool(x)
+        x = self.conv3(x)
+        x = F.relu(x)
+        x = self.maxpool(x)
+
+        # Flatten
         x = x.view(x.size(0), -1)
-        mu = self.fc_mu(x)
+
+        # FC layers
+        mu = self.fc_mu(x) 
+        mu = F.relu(mu)
         logvar = self.fc_logvar(x)
+        logvar = F.relu(logvar) 
+
         return mu, logvar
 
     def reparameterize(self, mu, logvar):
@@ -57,10 +67,26 @@ class CVAE(nn.Module):
     def decode(self, z, labels):
         one_hot_labels = self.one_hot(labels, self.class_size)
         z = torch.cat((z, one_hot_labels), dim=1)
-        proj_z = self.proj_fc(z)
-        proj_z = proj_z.view(proj_z.size(0), -1, self.intermediate_dims, self.intermediate_dims)
-        re_z = self.decoder(proj_z)
-        return re_z
+        # Fully connected layer to project z and labels back to feature map
+
+        # FC layer
+        z = self.fc_proj(z)
+        z = F.relu(z)
+
+        # Unflatten
+        z = z.view(z.size(0), -1, self.intermediate_dims, self.intermediate_dims)
+
+        # Conv layers
+        z = self.convT1(z)
+        z = F.relu(z)
+        z = self.convT2(z)
+        z = F.relu(z)
+        z = self.convT3(z)
+
+        # cut
+        z = z[:, :, :-1, :-1]
+
+        return z
 
     def forward(self, x, labels):
         mu, logvar = self.encode(x, labels)
@@ -70,13 +96,15 @@ class CVAE(nn.Module):
         return loss, x_hat
 
     def compute_loss(self, x, x_hat, mu, logvar):
-        mse = F.mse_loss(x_hat, x, reduction='sum')
-        kld =torch.mean(-0.5 * torch.sum(1 + logvar - mu ** 2 - logvar.exp(), dim = 1), dim = 0)
-        return mse + kld
+        mse = F.mse_loss(x_hat, x, reduction="sum")
+        # kld = torch.mean(-0.5 * torch.sum(1 + logvar - mu ** 2 - logvar.exp(), dim = 1), dim = 0)
+        kld = torch.sum(-0.5 * torch.sum(1 + logvar - mu ** 2 - logvar.exp(), dim = 1))
+        total = mse + 0.3 * kld
+        return total
  
     def generate(self, num_samples, labels):
         # Sample from the latent space
-        z = torch.randn(num_samples, self.latent_channels).to(next(self.parameters()).device)
+        z = torch.randn(num_samples, self.latent_channels).to(next(self.parameters()).device) * 3
         labels = torch.tensor(labels).to(next(self.parameters()).device)
         # Decode the samples
         generated_images = self.decode(z, labels)

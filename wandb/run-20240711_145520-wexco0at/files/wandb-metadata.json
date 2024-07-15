@@ -1,0 +1,91 @@
+{
+    "os": "Linux-6.5.0-41-generic-x86_64-with-glibc2.34",
+    "python": "3.8.16",
+    "heartbeatAt": "2024-07-11T12:55:20.840271",
+    "startedAt": "2024-07-11T12:55:20.389367",
+    "docker": null,
+    "cuda": null,
+    "args": [
+        "--data_flag",
+        "pathmnist",
+        "--use_config",
+        "CVAE_RGB",
+        "--label_to_binary",
+        "cancer-associated stroma",
+        "--max_epochs",
+        "10",
+        "--wandb",
+        "1"
+    ],
+    "state": "running",
+    "program": "training.py",
+    "codePathLocal": "training.py",
+    "codePath": "training.py",
+    "git": {
+        "remote": "https://github.com/luliuxxx/dgm_project.git",
+        "commit": "f74d96faff1c96c02431aeb375d69330611663fd"
+    },
+    "email": "maximilian.schindler@stud.tu-darmstadt.de",
+    "root": "/home/max/uni/dgm_project",
+    "host": "max-ubuntu-elitebook",
+    "username": "max",
+    "executable": "/home/max/.pyenv/versions/dgm_project/bin/python",
+    "cpu_count": 4,
+    "cpu_count_logical": 8,
+    "cpu_freq": {
+        "current": 3456.83125,
+        "min": 400.0,
+        "max": 4100.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 3800.038,
+            "min": 400.0,
+            "max": 4100.0
+        },
+        {
+            "current": 3799.677,
+            "min": 400.0,
+            "max": 4100.0
+        },
+        {
+            "current": 3800.011,
+            "min": 400.0,
+            "max": 4100.0
+        },
+        {
+            "current": 3962.474,
+            "min": 400.0,
+            "max": 4100.0
+        },
+        {
+            "current": 400.0,
+            "min": 400.0,
+            "max": 4100.0
+        },
+        {
+            "current": 3800.015,
+            "min": 400.0,
+            "max": 4100.0
+        },
+        {
+            "current": 3799.962,
+            "min": 400.0,
+            "max": 4100.0
+        },
+        {
+            "current": 3800.262,
+            "min": 400.0,
+            "max": 4100.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 303.62889862060547,
+            "used": 112.75242233276367
+        }
+    },
+    "memory": {
+        "total": 15.430282592773438
+    }
+}

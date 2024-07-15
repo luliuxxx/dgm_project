@@ -21,7 +21,7 @@ class Trainer():
         self.args = args
         self.max_epochs = args.max_epochs
         self.log_path = './logs'
-        self.scheduler = ReduceLROnPlateau(optimizer, mode='min', factor=0.5, patience=10)
+        #self.scheduler = ReduceLROnPlateau(optimizer, mode='min', factor=0.5, patience=10)
         self.use_labels = use_labels
         self.ckpt_name=ckpt_name
 
@@ -58,9 +58,9 @@ class Trainer():
         # compute mean loss
         mean_losses = {k: sum(v)/len(v) for k, v in losses.items()}
         print(f'Train Loss: {mean_losses["train"]}, Val Loss: {mean_losses["val"]}')
-        self.scheduler.step(mean_losses['val'])
-        lr = self.scheduler.get_last_lr()
-        print(f'Learning rate: {lr}')
+       # self.scheduler.step(mean_losses['val'])
+    # lr = self.optimizer.get_last_lr()
+    #    print(f'Learning rate: {lr}')
         if self.args.wandb:
             wandb_images_x_hat = wandb.Image(x_hats, caption='reconstructed')
             wandb_images_x = wandb.Image(x, caption='original')
@@ -107,7 +107,7 @@ def main():
     parser = ArgumentParser()
 
     # training arguments
-    parser.add_argument('--batch_size', type=int, default=256)
+    parser.add_argument('--batch_size', type=int, default=64)
     parser.add_argument('--eval_freq', type=int, default=5)
     parser.add_argument('--ckpt_freq', type=int, default=10)
     parser.add_argument('--max_epochs', type=int, default=20)
@@ -119,7 +119,7 @@ def main():
     # parser.add_argument('--load_checkpoint', type=str, default='/home/lliu/dgm_project/logs/checkpoints/vae_200.pt') # TODO: load the latest checkpoint
     
     # data arguments, multiple for multi-modality
-    parser.add_argument('--data_flag', type=str, default='pathmnist', choices=['pathmnist', 'breastmnist', 'chestmnist', 'dermamnist', 'octmnist', 'pneumoniamnist', 'retinamnist', 'organmnist_axial', 'organmnist_coronal', 'organmnist_sagittal'])
+    parser.add_argument('--data_flag', type=str, default='pathmnist', choices=['pathmnist', "bloodmnist", 'breastmnist', 'chestmnist', 'dermamnist', 'octmnist', 'pneumoniamnist', 'retinamnist', 'organmnist_axial', 'organmnist_coronal', 'organmnist_sagittal'])
 
     args = parser.parse_args()
 
@@ -132,7 +132,8 @@ def main():
     ckpt_name = f"{model_name}_{args.data_flag}"
     print(f"Number of parameters: {get_parameters(model):,}")
     # import ipdb; ipdb.set_trace()
-    optimizer = torch.optim.AdamW(model.parameters(), lr=args.learning_rate)
+    #optimizer = torch.optim.AdamW(model.parameters(), lr=args.learning_rate)
+    optimizer = torch.optim.Adamax(model.parameters(), lr=args.learning_rate)
 
     trainer = Trainer(model, optimizer, device, args, use_labels, ckpt_name)
 

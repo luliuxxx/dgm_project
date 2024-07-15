@@ -52,10 +52,12 @@ def load_samples_for_label(dataloader, label_to_filter=None, num_samples=8):
                     return torch.stack(images)
     return torch.stack(images)
 
-def plot_n_save_samples(generated_images, real_images, title, num_samples, filename):
+def plot_n_save_samples(generated_images, real_images, title, num_samples, filename, show_plot):
     # Plot images
     fig, axes = plt.subplots(num_samples, 2, figsize=(12, num_samples * 3))
     fig.suptitle(title, fontsize=16)
+
+    plt.subplots_adjust(wspace=0.01)
     
     for i in range(num_samples):
         # Plot generated images
@@ -73,11 +75,12 @@ def plot_n_save_samples(generated_images, real_images, title, num_samples, filen
             axes[i, 1].set_title("Real")
 
     plt.tight_layout(rect=[0, 0, 1, 0.96])  # Adjust layout to make room for the title
-    plt.show()
+    if show_plot:
+        plt.show()
     
     # Save the plot
     filepath = RESULTS_DIR / filename
-    fig.savefig(filepath)
+    fig.savefig(filepath, bbox_inches="tight")
     print(f"Plot saved to {filepath}")
 
 if __name__ == "__main__":
@@ -86,11 +89,12 @@ if __name__ == "__main__":
     parser = ArgumentParser()
 
     parser.add_argument("--model_name", type=str, default="CVAE", choices=["CVAE"])
-    parser.add_argument('--data_flag', type=str, default='pathmnist', choices=['pathmnist', 'breastmnist', 'chestmnist', 'dermamnist', 'octmnist', 'pneumoniamnist', 'retinamnist', 'organmnist_axial', 'organmnist_coronal', 'organmnist_sagittal'])
+    parser.add_argument('--data_flag', type=str, default='pathmnist', choices=['pathmnist', 'breastmnist', "bloodmnist", 'chestmnist', 'dermamnist', 'octmnist', 'pneumoniamnist', 'retinamnist', 'organmnist_axial', 'organmnist_coronal', 'organmnist_sagittal'])
     parser.add_argument("--label_to_binary", type=str)
     parser.add_argument("--num_samples", "--n", type=int, default=8)
     parser.add_argument("--ckpt_name", type=str)
     parser.add_argument("--use_config", type=str, default="CVAE_RGB")
+    parser.add_argument('--show_plot', type=int, default=1)
 
     args = parser.parse_args()
 
@@ -121,6 +125,6 @@ if __name__ == "__main__":
         # plot and save
         title = f"{args.model_name} with {args.data_flag} conditioned on {label_name}" if args.label_to_binary else f"{args.model_name} on {args.data_flag}" 
         filename = f"{args.model_name}_{args.use_config}_{args.data_flag}_{label_name}"
-        plot_n_save_samples(generated_images, real_imgs, title, num_samples, filename)
+        plot_n_save_samples(generated_images, real_imgs, title, num_samples, filename, show_plot=args.show_plot)
 
 
